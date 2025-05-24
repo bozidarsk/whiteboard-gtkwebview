@@ -1,0 +1,12 @@
+pkgbase = whiteboard-gtkwebview-git
+	pkgdesc = GtkSharp WebView for microsoft whiteboard.
+	pkgver = 1
+	pkgrel = 1
+	url = https://github.com/bozidarsk/whiteboard-gtkwebview
+	arch = x86_64
+	license = unknown
+	makedepends = dotnet-sdk
+	depends = dotnet-runtime
+	depends = webkit2gtk
+
+pkgname = whiteboard-gtkwebview-git
