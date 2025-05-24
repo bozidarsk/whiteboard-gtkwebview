@@ -2,7 +2,7 @@
 name='whiteboard-gtkwebview'
 pkgname="$name-git"
 pkgver=1
-pkgrel=1
+pkgrel=2
 pkgdesc="Gtk4 WebView for microsoft whiteboard."
 arch=('x86_64')
 url="https://github.com/bozidarsk/$name"
