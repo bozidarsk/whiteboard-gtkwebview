@@ -3,29 +3,29 @@ name='whiteboard-gtkwebview'
 pkgname="$name-git"
 pkgver=1
 pkgrel=1
-pkgdesc="GtkSharp WebView for microsoft whiteboard."
+pkgdesc="Gtk4 WebView for microsoft whiteboard."
 arch=('x86_64')
 url="https://github.com/bozidarsk/$name"
 license=('unknown')
-depends=('dotnet-runtime' 'webkit2gtk')
-makedepends=('dotnet-sdk')
+depends=('webkitgtk-6.0')
+makedepends=('pkgconf' 'gcc' 'webkitgtk-6.0')
 
 # to update version
 # makepkg --printsrcinfo > .SRCINFO
 
 prepare() 
 {
-	git clone "$url.git" --recurse-submodules "$srcdir/$name"
+	git clone "$url.git" "$srcdir/$name"
 }
 
 build() 
 {
 	cd "$srcdir/$name"
-	dotnet publish -r linux-x64 -c Release
+	gcc $(pkg-config --cflags webkitgtk-6.0) $(pkg-config --libs webkitgtk-6.0) -Wall -Wextra -Wpedantic main.c -o whiteboard-gtkwebview
 }
 
 package() 
 {
-	install -vDm755 "$srcdir/$name/bin/Release/*/linux-x64/publish/whiteboard-gtkwebview" -t "$pkgdir/usr/bin/"
+	install -vDm755 "$srcdir/$name/whiteboard-gtkwebview" -t "$pkgdir/usr/bin/"
 	install -vDm644 "$srcdir/$name/Whiteboard.desktop" -t "$pkgdir/usr/share/applications/"
 }
